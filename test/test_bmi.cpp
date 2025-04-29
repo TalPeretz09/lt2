@@ -25,8 +25,8 @@ TEST_CASE("weight2kg tests") {
     CHECK(weight2kg(0, 0, 22) == doctest::Approx(0.625));
     CHECK(weight2kg(1, 0, 0) == doctest::Approx(6.36).epsilon(0.01));
     CHECK(weight2kg(2, 5, 8) == doctest::Approx(15.23).epsilon(0.01));
-    CHECK(weight2kg(0, 0, 10000) == doctest::Approx(284.5).epsilon(0.01));
-    CHECK(weight2kg(0, -10, 100) == doctest::Approx(-1.7045).epsilon(0.01));
+    CHECK(weight2kg(0, 0, 10000) == doctest::Approx(284.5).epsilon(0.01));//edge case
+    CHECK(weight2kg(0, -10, 100) == doctest::Approx(-1.7045).epsilon(0.01));//edge case
 }
 
 TEST_CASE("height2metres tests") {
@@ -39,10 +39,10 @@ TEST_CASE("height2metres tests") {
 }
 
 TEST_CASE("categorise tests") {
-    CHECK(categorise(40, 1.7) == 'A'); // BMI roughly 13.8
-    CHECK(categorise(60, 1.7) == 'B'); // BMI roughly 20.8
-    CHECK(categorise(75, 1.7) == 'C'); // BMI roughly 25.9
-    CHECK(categorise(95, 1.7) == 'D'); // BMI roughly 32.9
+    CHECK(categorise(40, 1.6) == 'A'); // BMI 15.6
+    CHECK(categorise(60, 1.7) == 'B'); // BMI 20.8
+    CHECK(categorise(75, 1.7) == 'C'); // BMI 25.9
+    CHECK(categorise(95.5, 1.7) == 'D'); // BMI 33
     CHECK(categorise(0, 1.7) == 'A'); //edge case
     CHECK(categorise(100000, 1.7) == 'D'); //edge case
 }
