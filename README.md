@@ -27,7 +27,7 @@ Assume the following conversion:
 
 ```
 make
-make test
+make test_bmi
 ```
 
 # How the program should be run
@@ -44,3 +44,21 @@ This opens the file `study.dat` categorises each person and puts the result in t
 A7B3 B
 CC2E B
 ```
+There are 2 study.dat files which are able to be tested
+
+# File Format Clarity
+Each line in the data files represent a individual person and some info regarding their weight and height, as well as an ID number
+```
+<ID><stones><pounds><ounces><feet><inches>
+```
+
+#BMI Formula
+```
+BMI = weight(kg)/height(m)^2
+```
+
+#Dependencies/Frameworks
+The program uses the doctest C++ framework
+
+#Main Split
+The main function of the program is seperated from the primary program (bmi.cpp) in order to prevent any main detection collisions
