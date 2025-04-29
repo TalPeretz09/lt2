@@ -6,61 +6,67 @@
 
 using namespace std;
 
-double ounces2pounds(double ounces)
+// Convert ounces to pounds
+double ounces2pounds(int ounces)
 {
-    return(ounces/16);
+    return ounces / 16.0;
 }
 
-double stones2pounds(double stones)
+// Convert stones to pounds
+double stones2pounds(int stones)
 {
-    return(stones*14);
+    return stones * 14.0;
 }
 
-double weight2kg(double stones, double pounds, double ounces)
+// Convert stones, pounds, and ounces to kilograms
+double weight2kg(int stones, int pounds, int ounces)
 {
-    return (stones2pounds(stones)+pounds+ounces2pounds(ounces))/2.2;
+    return (stones2pounds(stones) + pounds + ounces2pounds(ounces)) / 2.2;
 }
 
-double height2metres(double feet, double inches)
+// Convert feet and inches to metres
+double height2metres(int feet, int inches)
 {
-    return(feet+inches/12)/3.28;
+    return (feet + inches / 12.0) / 3.28;
 }
 
+// Categorise BMI into a specific class
 char categorise(double kg, double metre)
 {
-    double bmi = kg/(metre*metre);
+    double bmi = kg / (metre * metre);
     char cat;
-    if (bmi<19)
-        cat='A';
-    else if (bmi<25)
-        cat='B';
-    else if (bmi<30)
-        cat='C';
+    if (bmi < 19)
+        cat = 'A';
+    else if (bmi < 25)
+        cat = 'B';
+    else if (bmi < 30)
+        cat = 'C';
     else
-        cat='D';
-    return(cat);
+        cat = 'D';
+    return cat;
 }
 
+//Go through the input and output files to determine BMI category for each person
 void process_data(char* input_file, char* output_file)
 {
     ifstream f_in;
     ofstream f_out;
-    string data;
     string person_id;
-    double stones, pounds, ounces, feet, inches;
+    int stones, pounds, ounces, feet, inches;
     double kg, m;
     char cat;
 
-    f_in.open(input_file,ios::in);
-    f_out.open(output_file,ofstream::out);
-    while (!f_in.eof())
+    f_in.open(input_file, ios::in);
+    f_out.open(output_file, ofstream::out);
+
+    while (f_in >> person_id >> stones >> pounds >> ounces >> feet >> inches)
     {
-    	f_in >> person_id >> stones >> pounds >> ounces >> feet >> inches;
-        kg=weight2kg(stones,pounds,ounces);
-        m=height2metres(feet,inches);
-        cat=categorise(kg,m);
-	f_out << person_id << " " << cat << endl;
+        kg = weight2kg(stones, pounds, ounces);
+        m = height2metres(feet, inches);
+        cat = categorise(kg, m);
+        f_out << person_id << " " << cat << endl;
     }
+
     f_in.close();
     f_out.close();
 }
