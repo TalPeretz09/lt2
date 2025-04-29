@@ -5,5 +5,5 @@ int main(int argc, char *argv[])
         return 1;
     }
     process_data(argv[1], argv[2]);
-    return -1;
+    return 0;
 }
