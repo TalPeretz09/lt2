@@ -3,26 +3,25 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "bmi.h"
 
 using namespace std;
 
-int ounces2pounds(int ounces)
+double ounces2pounds(double ounces)
 {
     return(ounces/16);
 }
 
-int stones2pounds(int stones)
+double stones2pounds(double stones)
 {
     return(stones*14);
 }
 
-double weight2kg(int stones, int pounds, int ounces)
+double weight2kg(double stones, double pounds, double ounces)
 {
     return (stones2pounds(stones)+pounds+ounces2pounds(ounces))/2.2;
 }
 
-double height2metres(int feet, int inches)
+double height2metres(double feet, double inches)
 {
     return(feet+inches/12)/3.28;
 }
@@ -48,7 +47,7 @@ void process_data(char* input_file, char* output_file)
     ofstream f_out;
     string data;
     string person_id;
-    int stones, pounds, ounces, feet, inches;
+    double stones, pounds, ounces, feet, inches;
     double kg, m;
     char cat;
 
@@ -64,14 +63,4 @@ void process_data(char* input_file, char* output_file)
     }
     f_in.close();
     f_out.close();
-}
-        
-int main(int argc, char *argv[])
-{
-    if (argc != 3) {
-        cerr << "Error: Please provide input and output filenames" << endl;
-        return 1;
-    }
-    process_data(argv[1], argv[2]);
-    return 0;
 }

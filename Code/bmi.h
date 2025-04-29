@@ -2,10 +2,10 @@
 #ifndef BMI_H
 #define BMI_H
 
-int ounces2pounds(int ounces);
-int stones2pounds(int stones);
-double weight2kg(int stones, int pounds, int ounces);
-double height2metres(int feet, int inches);
+double ounces2pounds(double ounces);
+double stones2pounds(double stones);
+double weight2kg(double stones, double pounds, double ounces);
+double height2metres(double feet, double inches);
 char categorise(double kg, double metre);
 
 #endif
