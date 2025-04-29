@@ -8,5 +8,9 @@ test: bmi
 	./bmi study.dat cats.txt
 	cat cats.txt
 
+test_bmi:
+	g++ -std=c++11 test/test_bmi.cpp Code/bmi.cpp -o test/test_bmi
+	./test/test_bmi
+
 clean:
 	rm bmi study.dat cats.txt
