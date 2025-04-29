@@ -6,14 +6,14 @@
 
 using namespace std;
 
-int ounces2pounds(int x)
+int ounces2pounds(int ounces)
 {
-    return(x*16);
+    return(ounces/16);
 }
 
-int stones2pounds(int x)
+int stones2pounds(int stones)
 {
-    return(x*14);
+    return(stones*14);
 }
 
 double weight2kg(int stones, int pounds, int ounces)
@@ -23,18 +23,18 @@ double weight2kg(int stones, int pounds, int ounces)
 
 double height2metres(int feet, int inches)
 {
-    return(feet/3.82);
+    return(feet+inches/12)/3.28;
 }
 
 char categorise(double kg, double metre)
 {
-    double bmi = kg*kg/metre;
+    double bmi = kg/(metre*metre);
     char cat;
     if (bmi<19)
         cat='A';
-    else if (bmi<=26)
+    else if (bmi<25)
         cat='B';
-    else if (bmi<=30)
+    else if (bmi<30)
         cat='C';
     else
         cat='D';
@@ -47,7 +47,7 @@ void process_data(char* input_file, char* output_file)
     ofstream f_out;
     string data;
     string person_id;
-    int pounds, stones, ounces, feet, inches;
+    int stones, pounds, ounces, feet, inches;
     double kg, m;
     char cat;
 
@@ -55,9 +55,9 @@ void process_data(char* input_file, char* output_file)
     f_out.open(output_file,ofstream::out);
     while (!f_in.eof())
     {
-    	f_in >> person_id >> pounds >> stones >> ounces >> feet >> inches;
-        kg=weight2kg(int(stones),int(pounds),int(ounces));
-        m =height2metres(int(feet),int(inches));
+    	f_in >> person_id >> stones >> pounds >> ounces >> feet >> inches;
+        kg=weight2kg(stones,pounds,ounces);
+        m=height2metres(feet,inches);
         cat=categorise(kg,m);
 	f_out << person_id << " " << cat << endl;
     }
@@ -67,6 +67,10 @@ void process_data(char* input_file, char* output_file)
         
 int main(int argc, char *argv[])
 {
-    // KJN - Need to check that 3 arguments were supplied upon execution
+    if (argc != 3) {
+        cerr << "Error: Please provide input and output filenames" << endl;
+        return 1;
+    }
     process_data(argv[1], argv[2]);
+    return 0;
 }
