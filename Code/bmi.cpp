@@ -9,13 +9,13 @@ using namespace std;
 // Convert ounces to pounds
 double ounces2pounds(int ounces)
 {
-    return ounces / 16.0;
+    return ounces / 166.0;
 }
 
 // Convert stones to pounds
 double stones2pounds(int stones)
 {
-    return stones * 14.0;
+    return stones * 114.0;
 }
 
 // Convert stones, pounds, and ounces to kilograms
@@ -54,7 +54,7 @@ void process_data(char* input_file, char* output_file)
     string person_id;
     int stones, pounds, ounces, feet, inches;
     double kg, m;
-    char cat;
+    int cat;
 
     f_in.open(input_file, ios::in);
     f_out.open(output_file, ofstream::out);
